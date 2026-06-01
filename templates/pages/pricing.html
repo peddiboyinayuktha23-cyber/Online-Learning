@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Pricing | LearnHub{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><span class="eyebrow">Pricing</span><h1>Simple plans for steady growth</h1><p>Choose a plan that fits your learning rhythm.</p></div></section>
+<section class="section-pad"><div class="container"><div class="row g-4">
+    <div class="col-md-4"><div class="pricing-card"><h2>Starter</h2><strong>Free</strong><p>Explore free lessons and previews.</p><a class="btn btn-soft w-100" href="{% url 'signup' %}">Start</a></div></div>
+    <div class="col-md-4"><div class="pricing-card featured"><span class="badge text-bg-light">Popular</span><h2>Pro</h2><strong>$19/mo</strong><p>Full catalog, projects, certificates.</p><a class="btn btn-light w-100" href="{% url 'signup' %}">Go Pro</a></div></div>
+    <div class="col-md-4"><div class="pricing-card"><h2>Teams</h2><strong>Custom</strong><p>Seats, analytics, and team reporting.</p><a class="btn btn-soft w-100" href="{% url 'contact' %}">Contact</a></div></div>
+</div></div></section>
+{% endblock %}

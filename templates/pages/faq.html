@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}FAQ | LearnHub{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><span class="eyebrow">FAQ</span><h1>Questions, answered</h1><p>Everything you need to know before starting.</p></div></section>
+<section class="section-pad"><div class="container"><div class="content-panel mx-auto faq-panel">
+    <div class="accordion" id="faqAccordion">
+        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">Do I get lifetime access?</button></h2><div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes. Enrolled courses remain in your dashboard.</div></div></div>
+        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">Are certificates included?</button></h2><div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Certificates are available after completing all required lessons and projects.</div></div></div>
+        <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">Can I learn on mobile?</button></h2><div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes. The entire portal is responsive and designed for mobile learning.</div></div></div>
+    </div>
+</div></div></section>
+{% endblock %}

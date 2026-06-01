@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LearnHub</title>
+
+    <!-- GOOGLE FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#f5f7ff;
+            overflow-x:hidden;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+
+            width:100%;
+            height:85px;
+
+            background:white;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:0 60px;
+
+            position:fixed;
+            top:0;
+
+            z-index:1000;
+
+            box-shadow:0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .left-nav{
+
+            display:flex;
+            align-items:center;
+            gap:25px;
+        }
+
+        /* MENU ICON */
+
+        .menu-icon{
+
+            font-size:28px;
+
+            color:#2563eb;
+
+            cursor:pointer;
+        }
+
+        /* LOGO */
+
+        .logo{
+
+            font-size:34px;
+            font-weight:700;
+
+            color:#2563eb;
+        }
+
+        /* BUTTONS */
+
+        .nav-buttons{
+
+            display:flex;
+            gap:18px;
+        }
+
+        .login-btn,
+        .signup-btn{
+
+            padding:12px 26px;
+
+            border:none;
+            border-radius:10px;
+
+            font-size:15px;
+            font-weight:600;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .login-btn{
+
+            background:white;
+            color:#2563eb;
+
+            border:2px solid #2563eb;
+        }
+
+        .login-btn:hover{
+
+            background:#2563eb;
+            color:white;
+        }
+
+        .signup-btn{
+
+            background:#2563eb;
+            color:white;
+        }
+
+        .signup-btn:hover{
+
+            background:#1d4ed8;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+
+            width:280px;
+            height:100vh;
+
+            background:#111827;
+
+            position:fixed;
+
+            top:0;
+            left:-280px;
+
+            padding:30px 25px;
+
+            transition:0.4s;
+
+            z-index:2000;
+        }
+
+        .sidebar.active{
+
+            left:0;
+        }
+
+        /* CLOSE BUTTON */
+
+        .close-sidebar{
+
+            text-align:right;
+
+            margin-bottom:25px;
+
+            cursor:pointer;
+
+            color:white;
+
+            font-size:28px;
+        }
+
+        /* SIDEBAR TITLE */
+
+        .sidebar h2{
+
+            color:white;
+
+            margin-bottom:35px;
+
+            font-size:28px;
+        }
+
+        /* SIDEBAR MENU */
+
+        .sidebar ul{
+
+            list-style:none;
+        }
+
+        .sidebar ul li{
+
+            margin-bottom:22px;
+        }
+
+        .sidebar ul li a{
+
+            text-decoration:none;
+
+            color:#d1d5db;
+
+            font-size:18px;
+
+            display:flex;
+            align-items:center;
+
+            gap:15px;
+
+            padding:12px 15px;
+
+            border-radius:10px;
+
+            transition:0.3s;
+        }
+
+        .sidebar ul li a:hover{
+
+            background:#2563eb;
+
+            color:white;
+        }
+
+        /* HERO SECTION */
+
+        .hero{
+
+            width:100%;
+            min-height:100vh;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:130px 80px 60px;
+
+            background:linear-gradient(to right,#2563eb,#7c3aed);
+
+            color:white;
+        }
+
+        .hero-text{
+
+            width:50%;
+        }
+
+        .hero-text h1{
+
+            font-size:65px;
+
+            line-height:1.3;
+
+            margin-bottom:25px;
+        }
+
+        .hero-text p{
+
+            font-size:19px;
+
+            line-height:1.9;
+
+            color:#e5e7eb;
+
+            margin-bottom:35px;
+        }
+
+        .hero-btn{
+
+            padding:15px 35px;
+
+            border:none;
+            border-radius:12px;
+
+            background:white;
+            color:#2563eb;
+
+            font-size:16px;
+            font-weight:600;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .hero-btn:hover{
+
+            transform:translateY(-5px);
+        }
+
+        .hero-image{
+
+            width:45%;
+            text-align:center;
+        }
+
+        .hero-image img{
+
+            width:100%;
+            max-width:500px;
+
+            animation:float 4s ease-in-out infinite;
+        }
+
+        @keyframes float{
+
+            0%{
+                transform:translateY(0px);
+            }
+
+            50%{
+                transform:translateY(-15px);
+            }
+
+            100%{
+                transform:translateY(0px);
+            }
+        }
+
+        /* FEATURES */
+
+        .features{
+
+            padding:80px;
+
+            display:grid;
+
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+            gap:30px;
+        }
+
+        .feature-card{
+
+            background:white;
+
+            padding:40px;
+
+            border-radius:20px;
+
+            text-align:center;
+
+            box-shadow:0 5px 18px rgba(0,0,0,0.08);
+
+            transition:0.3s;
+        }
+
+        .feature-card:hover{
+
+            transform:translateY(-10px);
+        }
+
+        .feature-card i{
+
+            font-size:55px;
+
+            color:#2563eb;
+
+            margin-bottom:20px;
+        }
+
+        .feature-card h3{
+
+            margin-bottom:15px;
+
+            color:#111827;
+        }
+
+        .feature-card p{
+
+            color:#6b7280;
+
+            line-height:1.8;
+        }
+
+        /* FOOTER */
+
+        .footer{
+
+            background:#111827;
+
+            color:white;
+
+            padding:60px 80px 20px;
+        }
+
+        .footer-container{
+
+            display:grid;
+
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+            gap:40px;
+
+            margin-bottom:40px;
+        }
+
+        .footer-box h2,
+        .footer-box h3{
+
+            margin-bottom:20px;
+        }
+
+        .footer-box p{
+
+            color:#d1d5db;
+
+            line-height:1.8;
+        }
+
+        .social-icons{
+
+            display:flex;
+
+            gap:18px;
+        }
+
+        .social-icons a{
+
+            width:45px;
+            height:45px;
+
+            background:#1e293b;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            border-radius:50%;
+
+            color:white;
+
+            text-decoration:none;
+
+            font-size:18px;
+
+            transition:0.3s;
+        }
+
+        .social-icons a:hover{
+
+            background:#2563eb;
+
+            transform:translateY(-5px);
+        }
+
+        .copyright{
+
+            border-top:1px solid #374151;
+
+            padding-top:20px;
+
+            text-align:center;
+        }
+
+        .copyright p{
+
+            color:#9ca3af;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:950px){
+
+            .hero{
+
+                flex-direction:column;
+
+                text-align:center;
+            }
+
+            .hero-text{
+
+                width:100%;
+
+                margin-bottom:50px;
+            }
+
+            .hero-image{
+
+                width:100%;
+            }
+
+            .navbar{
+
+                padding:0 20px;
+            }
+
+            .hero-text h1{
+
+                font-size:45px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="close-sidebar" onclick="toggleSidebar()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </div>
+
+        <h2>Main Menu</h2>
+
+        <ul>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-book"></i>
+                    Courses
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Categories
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    Tests
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-certificate"></i>
+                    Certifications
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="left-nav">
+
+            <div class="menu-icon" onclick="toggleSidebar()">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </div>
+
+            <div class="logo">
+
+                LearnHub
+
+            </div>
+
+        </div>
+
+        <div class="nav-buttons">
+
+            <button class="login-btn">
+
+                Login
+
+            </button>
+
+            <button class="signup-btn">
+
+                Sign Up
+
+            </button>
+
+        </div>
+
+    </nav>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+
+                Welcome To <br>
+                E-Learning Hub
+
+            </h1>
+
+            <p>
+
+                LearnHub is a modern E-Learning platform designed
+                to help students learn programming, web development,
+                artificial intelligence, cloud computing and many
+                more technologies.
+
+            </p>
+
+            <button class="hero-btn">
+
+                Start Learning
+
+            </button>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
+
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="features">
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-book-open"></i>
+
+            <h3>Professional Courses</h3>
+
+            <p>
+
+                Explore modern technology courses with interactive learning.
+
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-laptop-code"></i>
+
+            <h3>Practical Learning</h3>
+
+            <p>
+
+                Learn through lessons, projects and real-time examples.
+
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-certificate"></i>
+
+            <h3>Certificates</h3>
+
+            <p>
+
+                Earn certificates after successfully completing courses.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-box">
+
+                <h2>LearnHub</h2>
+
+                <p>
+
+                    LearnHub is a modern E-Learning platform
+                    designed to help students learn skills,
+                    complete courses and earn certificates online.
+
+                </p>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+
+            <p>
+
+                © 2026 LearnHub E-Learning Portal | All Rights Reserved
+
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function toggleSidebar(){
+
+            document
+            .getElementById("sidebar")
+            .classList
+            .toggle("active");
+        }
+
+    </script>
+
+</body>
+
+</html>

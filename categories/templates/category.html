@@ -1,0 +1,481 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Categories | LearnHub</title>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#f5f7ff;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            width:260px;
+            height:100vh;
+            background:#081229;
+            position:fixed;
+            top:0;
+            left:0;
+            padding:30px 20px;
+        }
+
+        .sidebar h2{
+            color:white;
+            margin-bottom:40px;
+            font-size:32px;
+        }
+
+        .sidebar ul{
+            list-style:none;
+        }
+
+        .sidebar ul li{
+            margin:22px 0;
+        }
+
+        .sidebar ul li a{
+            color:white;
+            text-decoration:none;
+            font-size:18px;
+            display:flex;
+            align-items:center;
+            gap:15px;
+            padding:12px;
+            border-radius:10px;
+            transition:0.3s;
+        }
+
+        .sidebar ul li a:hover{
+            background:#2563eb;
+        }
+
+        /* MAIN CONTENT */
+
+        .main{
+            margin-left:260px;
+            padding:40px;
+        }
+
+        .title{
+            font-size:42px;
+            color:#111827;
+            margin-bottom:15px;
+        }
+
+        .subtitle{
+            color:#6b7280;
+            margin-bottom:40px;
+            font-size:18px;
+        }
+
+        /* CATEGORY SECTION */
+
+        .category-section{
+            margin-bottom:60px;
+        }
+
+        .category-heading{
+            font-size:34px;
+            margin-bottom:25px;
+            color:#2563eb;
+        }
+
+        .course-container{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .course-card{
+            background:white;
+            border-radius:18px;
+            padding:25px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+            transition:0.3s;
+        }
+
+        .course-card:hover{
+            transform:translateY(-8px);
+        }
+
+        .course-card i{
+            font-size:45px;
+            color:#2563eb;
+            margin-bottom:20px;
+        }
+
+        .course-card h3{
+            margin-bottom:15px;
+            color:#111827;
+        }
+
+        .course-card p{
+            color:#6b7280;
+            line-height:1.7;
+            margin-bottom:20px;
+        }
+
+        .btn{
+            padding:10px 20px;
+            border:none;
+            border-radius:8px;
+            background:#2563eb;
+            color:white;
+            cursor:pointer;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#1d4ed8;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:900px){
+
+            .sidebar{
+                width:100%;
+                height:auto;
+                position:relative;
+            }
+
+            .main{
+                margin-left:0;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>LearnHub</h2>
+
+        <ul>
+
+            <li>
+                <a href="/dashboard/">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="/courses/">
+                    <i class="fa-solid fa-book"></i>
+                    Courses
+                </a>
+            </li>
+
+            <li>
+                <a href="/categories/">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Categories
+                </a>
+            </li>
+
+            <li>
+                <a href="/tests/">
+                    <i class="fa-solid fa-file-circle-question"></i>
+                    Tests
+                </a>
+            </li>
+
+            <li>
+                <a href="/certifications/">
+                    <i class="fa-solid fa-certificate"></i>
+                    Certifications
+                </a>
+            </li>
+
+            <li>
+                <a href="/">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main">
+
+        <h1 class="title">
+            Course Categories
+        </h1>
+
+        <p class="subtitle">
+            Explore courses based on difficulty levels.
+        </p>
+
+        <!-- BASIC CATEGORY -->
+
+        <div class="category-section">
+
+            <h2 class="category-heading">
+                Basic Level Courses
+            </h2>
+
+            <div class="course-container">
+
+                <div class="course-card">
+
+                    <i class="fa-brands fa-html5"></i>
+
+                    <h3>HTML Basics</h3>
+
+                    <p>
+                        Learn structure of webpages using HTML.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-brands fa-css3-alt"></i>
+
+                    <h3>CSS Fundamentals</h3>
+
+                    <p>
+                        Design beautiful webpages using CSS styles.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-brands fa-python"></i>
+
+                    <h3>Python Introduction</h3>
+
+                    <p>
+                        Learn variables, loops and functions in Python.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-solid fa-database"></i>
+
+                    <h3>SQL Basics</h3>
+
+                    <p>
+                        Understand databases and SQL queries.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MEDIUM CATEGORY -->
+
+        <div class="category-section">
+
+            <h2 class="category-heading">
+                Medium Level Courses
+            </h2>
+
+            <div class="course-container">
+
+                <div class="course-card">
+
+                    <i class="fa-brands fa-js"></i>
+
+                    <h3>JavaScript</h3>
+
+                    <p>
+                        Build interactive websites using JavaScript.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-brands fa-react"></i>
+
+                    <h3>React JS</h3>
+
+                    <p>
+                        Create modern frontend applications using React.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-solid fa-server"></i>
+
+                    <h3>Django Framework</h3>
+
+                    <p>
+                        Develop backend web applications using Django.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-solid fa-cloud"></i>
+
+                    <h3>Cloud Computing</h3>
+
+                    <p>
+                        Learn cloud platforms and deployment basics.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ADVANCED CATEGORY -->
+
+        <div class="category-section">
+
+            <h2 class="category-heading">
+                Advanced Level Courses
+            </h2>
+
+            <div class="course-container">
+
+                <div class="course-card">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <h3>Artificial Intelligence</h3>
+
+                    <p>
+                        Learn machine learning and AI concepts deeply.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <h3>Cyber Security</h3>
+
+                    <p>
+                        Understand ethical hacking and security systems.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-solid fa-network-wired"></i>
+
+                    <h3>DevOps</h3>
+
+                    <p>
+                        Learn CI/CD pipelines and deployment automation.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+                <div class="course-card">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    <h3>Deep Learning</h3>
+
+                    <p>
+                        Build neural network models and AI systems.
+                    </p>
+
+                    <button class="btn">
+                        Enroll Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

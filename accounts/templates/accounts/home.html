@@ -1,0 +1,180 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LearnHub</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#eef2ff;
+        }
+
+        .navbar{
+            width:100%;
+            height:80px;
+            background:white;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:0 60px;
+
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo{
+            font-size:34px;
+            font-weight:700;
+            color:#2563eb;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:20px;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            background:#2563eb;
+            color:white;
+
+            padding:10px 22px;
+
+            border-radius:10px;
+
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            background:#1d4ed8;
+        }
+
+        .hero{
+            height:90vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            flex-direction:column;
+
+            text-align:center;
+
+            padding:20px;
+        }
+
+        .hero h1{
+            font-size:65px;
+            margin-bottom:20px;
+            color:#111827;
+        }
+
+        .hero p{
+            width:60%;
+            font-size:18px;
+            line-height:1.8;
+            color:#6b7280;
+            margin-bottom:30px;
+        }
+
+        .hero button{
+            padding:14px 30px;
+
+            border:none;
+
+            border-radius:10px;
+
+            background:#2563eb;
+            color:white;
+
+            font-size:17px;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .hero button:hover{
+            background:#1d4ed8;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+
+            LearnHub
+
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'login' %}">
+
+                Login
+
+            </a>
+
+            <a href="{% url 'signup' %}">
+
+                Signup
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- HERO SECTION -->
+
+    <div class="hero">
+
+        <h1>
+
+            Welcome To LearnHub
+
+        </h1>
+
+        <p>
+
+            Learn modern technologies, complete lessons,
+            attend tests and earn certificates professionally
+            using our advanced E-Learning platform.
+
+        </p>
+
+<button onclick='window.location.href="/accounts/login/"'>
+            Start Learning
+
+        </button>
+
+    </div>
+
+</body>
+
+</html>

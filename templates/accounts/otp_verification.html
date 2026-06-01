@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}OTP Verification | LearnHub{% endblock %}
+{% block content %}
+<section class="auth-section"><div class="container"><div class="auth-card compact-auth" data-aos="fade-up"><div class="auth-form-wrap"><h1>Verify OTP</h1><p>Enter the 6-digit code sent to your email.</p><form class="needs-validation auth-form" novalidate method="post">{% csrf_token %}<div class="otp-grid"><input class="form-control" maxlength="1" required><input class="form-control" maxlength="1" required><input class="form-control" maxlength="1" required><input class="form-control" maxlength="1" required><input class="form-control" maxlength="1" required><input class="form-control" maxlength="1" required></div><button class="btn btn-primary-gradient w-100" type="submit">Verify</button><p class="auth-switch">Did not receive it? <a href="#">Resend code</a></p></form></div></div></div></section>
+{% endblock %}

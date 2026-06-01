@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Profile | LearnHub{% endblock %}
+{% block content %}
+<section class="dashboard-shell"><div class="container"><div class="profile-hero content-panel" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" alt="Profile avatar"><div><span class="eyebrow">Profile</span><h1>LearnHub Student</h1><p>Frontend learner building practical web projects.</p><a class="btn btn-primary-gradient" href="{% url 'edit_profile' %}">Edit Profile</a></div></div></div></section>
+{% endblock %}

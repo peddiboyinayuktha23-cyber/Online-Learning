@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg sticky-top app-navbar" aria-label="Primary navigation">
+    <div class="container">
+        <a class="navbar-brand brand-mark" href="{% url 'home' %}">
+            <span><i class="fa-solid fa-graduation-cap"></i></span> LearnHub
+        </a>
+        <div class="d-flex align-items-center gap-2 order-lg-2">
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle>
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'courses' %}">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'categories' %}">Categories</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+            <div class="d-lg-flex align-items-center gap-2">
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-soft dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-user"></i> {{ user.username|default:'Learner' }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a class="btn btn-soft w-100 w-lg-auto mb-2 mb-lg-0" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-primary-gradient w-100 w-lg-auto" href="{% url 'signup' %}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

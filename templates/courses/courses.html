@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Courses | Online Learning Hub{% endblock %}
+{% block content %}
+<section class="page-hero compact">
+    <div class="container">
+        <span class="eyebrow">Course catalog</span>
+        <h1>Find your next course</h1>
+        <p>Filter by topic, level, and goal to find practical courses built for progress.</p>
+    </div>
+</section>
+<section class="section-pad">
+    <div class="container">
+        <form class="filter-bar" data-aos="fade-up" method="get">
+            <div class="search-inline">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="courseSearch" name="q" value="{{ filters.q }}" type="search" placeholder="Search course titles" aria-label="Search course titles">
+            </div>
+            <select class="form-select" name="category" aria-label="Category">
+                <option value="">All categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.slug }}" {% if filters.category == category.slug %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-select" name="level" aria-label="Level">
+                <option value="">All levels</option>
+                <option value="BEGINNER">Beginner</option>
+                <option value="INTERMEDIATE">Intermediate</option>
+                <option value="ADVANCED">Advanced</option>
+            </select>
+            <button class="btn btn-primary-gradient" type="submit">Filter</button>
+        </form>
+        <div class="row g-4 course-grid mt-2">
+            {% include 'courses/_course_cards.html' %}
+        </div>
+    </div>
+</section>
+{% endblock %}

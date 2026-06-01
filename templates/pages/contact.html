@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Contact | LearnHub{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><span class="eyebrow">Contact</span><h1>How can we help?</h1><p>Reach our learner support team for course, billing, or instructor questions.</p></div></section>
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="content-panel h-100"><h2>Get in touch</h2><p><i class="fa-solid fa-envelope"></i> support@learnhub.example</p><p><i class="fa-solid fa-phone"></i> +91 98765 43210</p><p><i class="fa-solid fa-location-dot"></i> Bengaluru, India</p></div>
+            </div>
+            <div class="col-lg-7" data-aos="fade-left">
+                <form class="content-panel needs-validation" novalidate>
+                    <div class="row g-3"><div class="col-md-6"><label class="form-label">Name</label><input class="form-control" required placeholder="Your name"><div class="invalid-feedback">Name is required.</div></div><div class="col-md-6"><label class="form-label">Email</label><input class="form-control" type="email" required placeholder="you@example.com"><div class="invalid-feedback">Enter a valid email.</div></div><div class="col-12"><label class="form-label">Message</label><textarea class="form-control" rows="5" required placeholder="Tell us what you need"></textarea><div class="invalid-feedback">Message is required.</div></div><div class="col-12"><button class="btn btn-primary-gradient" type="submit">Send Message</button></div></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

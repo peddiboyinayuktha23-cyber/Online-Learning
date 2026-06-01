@@ -1,0 +1,18 @@
+{% load static %}
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-card" data-aos="fade-up">
+            <div class="auth-art">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Online course on laptop">
+                <div class="auth-art-copy">
+                    <span class="eyebrow">LearnHub</span>
+                    <h2>Learn beautifully, from anywhere.</h2>
+                    <p>Access premium courses, dashboards, and certificates with one account.</p>
+                </div>
+            </div>
+            <div class="auth-form-wrap">
+                {% block auth_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</section>

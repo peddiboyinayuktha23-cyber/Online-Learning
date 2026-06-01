@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Categories | LearnHub{% endblock %}
+{% block content %}
+<section class="page-hero compact">
+    <div class="container">
+        <span class="eyebrow">Explore topics</span>
+        <h1>Browse categories</h1>
+        <p>Pick a field and follow a curated path from beginner to job-ready.</p>
+    </div>
+</section>
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-4">
+            {% for category in categories %}
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <a class="category-wide-card" href="{% url 'courses' %}">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <strong>{{ category.name }}</strong>
+                        <span>Explore courses</span>
+                    </a>
+                </div>
+            {% empty %}
+                <div class="col-md-6 col-lg-4" data-aos="fade-up"><a class="category-wide-card" href="{% url 'courses' %}"><i class="fa-solid fa-code"></i><strong>Development</strong><span>Programming, web, apps</span></a></div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100"><a class="category-wide-card" href="{% url 'courses' %}"><i class="fa-solid fa-palette"></i><strong>Design</strong><span>UI, UX, product design</span></a></div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200"><a class="category-wide-card" href="{% url 'courses' %}"><i class="fa-solid fa-chart-pie"></i><strong>Business</strong><span>Analytics and strategy</span></a></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

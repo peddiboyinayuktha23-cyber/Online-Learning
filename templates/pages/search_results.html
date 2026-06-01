@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Search | LearnHub{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><span class="eyebrow">Search</span><h1>Search results</h1><p>Showing matching courses and learning paths.</p></div></section>
+<section class="section-pad"><div class="container"><div class="filter-bar mb-4"><div class="search-inline"><i class="fa-solid fa-magnifying-glass"></i><input type="search" value="{{ request.GET.q }}" placeholder="Search again"></div></div><div class="row g-4 course-grid">{% include 'courses/_course_cards.html' %}</div></div></section>
+{% endblock %}
