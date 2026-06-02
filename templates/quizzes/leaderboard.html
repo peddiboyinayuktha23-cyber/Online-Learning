@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Leaderboard | Online Learning Portal{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><h1>Leaderboard</h1><p>{{ quiz.title }}</p></div></section>
+<section class="section-pad"><div class="container content-panel">
+    <table class="table"><thead><tr><th>Learner</th><th>Best Score</th></tr></thead><tbody>
+    {% for row in leaders %}<tr><td>{{ row.student__first_name }} {{ row.student__last_name|default:row.student__email }}</td><td>{{ row.best_score }}%</td></tr>{% empty %}<tr><td colspan="2">No attempts yet.</td></tr>{% endfor %}
+    </tbody></table>
+</div></section>
+{% endblock %}

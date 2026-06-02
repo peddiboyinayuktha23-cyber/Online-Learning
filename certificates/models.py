@@ -18,6 +18,7 @@ class Certificate(models.Model):
         null=True,
         validators=[FileExtensionValidator(["pdf"])],
     )
+    qr_code = models.ImageField(upload_to="certificates/qr/%Y/%m/", blank=True, null=True)
     enrollment = models.OneToOneField(
         "enrollments.Enrollment",
         on_delete=models.CASCADE,

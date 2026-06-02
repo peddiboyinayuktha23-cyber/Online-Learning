@@ -1,12 +1,18 @@
 from django.contrib import admin
 
-from .models import Assignment, Course, Lesson, Question, Quiz, Resource, Submission
+from .models import Assignment, Course, CourseSection, Lesson, Question, Quiz, Resource, Submission, WatchHistory
 
 
 class LessonInline(admin.TabularInline):
     model = Lesson
     extra = 0
     fields = ("title", "order", "duration", "is_preview")
+
+
+class CourseSectionInline(admin.TabularInline):
+    model = CourseSection
+    extra = 0
+    fields = ("title", "order")
 
 
 class ResourceInline(admin.TabularInline):
@@ -22,7 +28,14 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ("title", "description", "instructor__email", "category__name")
     prepopulated_fields = {"slug": ("title",)}
     autocomplete_fields = ("instructor", "category")
-    inlines = [LessonInline]
+    inlines = [CourseSectionInline, LessonInline]
+
+
+@admin.register(CourseSection)
+class CourseSectionAdmin(admin.ModelAdmin):
+    list_display = ("title", "course", "order")
+    search_fields = ("title", "course__title")
+    autocomplete_fields = ("course",)
 
 
 @admin.register(Lesson)
@@ -31,7 +44,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_filter = ("is_preview", "created_at")
     search_fields = ("title", "description", "course__title")
     prepopulated_fields = {"slug": ("title",)}
-    autocomplete_fields = ("course",)
+    autocomplete_fields = ("course", "section")
     inlines = [ResourceInline]
 
 
@@ -75,3 +88,11 @@ class SubmissionAdmin(admin.ModelAdmin):
     list_display = ("assignment", "student", "grade", "submitted_at")
     search_fields = ("assignment__title", "student__email")
     autocomplete_fields = ("assignment", "student")
+
+
+@admin.register(WatchHistory)
+class WatchHistoryAdmin(admin.ModelAdmin):
+    list_display = ("student", "lesson", "watched_seconds", "completed", "last_watched_at")
+    list_filter = ("completed", "last_watched_at")
+    search_fields = ("student__email", "lesson__title")
+    autocomplete_fields = ("student", "lesson")

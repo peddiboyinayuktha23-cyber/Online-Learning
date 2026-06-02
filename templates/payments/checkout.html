@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | Online Learning Portal{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><h1>Checkout</h1><p>{{ course.title }}</p></div></section>
+<section class="section-pad"><div class="container content-panel">
+    <h2>${{ payment.amount }}</h2>
+    <p>Secure payment powered by Stripe.</p>
+    <form method="post">{% csrf_token %}<button class="btn btn-primary-gradient" type="submit">Pay with Stripe</button></form>
+</div></section>
+{% endblock %}

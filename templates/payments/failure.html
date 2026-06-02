@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Payment Failed | Online Learning Portal{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><h1>Payment Failed</h1><p>Please try again or contact support.</p></div></section>
+<section class="section-pad"><div class="container content-panel"><p>Order: {{ payment.order_id }}</p><a class="btn btn-primary-gradient" href="{% url 'courses' %}">Back to Courses</a></div></section>
+{% endblock %}

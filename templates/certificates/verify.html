@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Verify Certificate | Online Learning Portal{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><h1>Certificate Verified</h1><p>{{ certificate.certificate_id }}</p></div></section>
+<section class="section-pad"><div class="container content-panel">
+    <h2>Valid Certificate</h2>
+    <p>{{ certificate.student.full_name }} completed {{ certificate.course.title }} on {{ certificate.issue_date }}.</p>
+</div></section>
+{% endblock %}

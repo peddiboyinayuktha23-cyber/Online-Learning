@@ -6,11 +6,10 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 
+from onlinelearning.core_models import AuditModel
 
-class TimeStampedModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
+class TimeStampedModel(AuditModel):
     class Meta:
         abstract = True
 
@@ -49,13 +48,19 @@ class Course(TimeStampedModel):
         limit_choices_to={"role": "INSTRUCTOR"},
     )
     category = models.ForeignKey("categories.Category", on_delete=models.PROTECT, related_name="courses")
+    subcategory = models.ForeignKey(
+        "categories.SubCategory",
+        on_delete=models.PROTECT,
+        related_name="courses",
+        blank=True,
+        null=True,
+    )
     thumbnail = models.ImageField(upload_to="courses/thumbnails/%Y/%m/", blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    is_free = models.BooleanField(default=False, db_index=True)
     level = models.CharField(max_length=20, choices=Level.choices, default=Level.BEGINNER, db_index=True)
     language = models.CharField(max_length=60, default="English", db_index=True)
     is_published = models.BooleanField(default=False, db_index=True)
-    created_at = models.DateTimeField(default=timezone.now, db_index=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-created_at"]
@@ -80,9 +85,33 @@ class Course(TimeStampedModel):
         return self.title
 
 
+class CourseSection(TimeStampedModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="sections")
+    title = models.CharField(max_length=180)
+    description = models.TextField(blank=True)
+    order = models.PositiveIntegerField(default=0, db_index=True)
+
+    class Meta:
+        ordering = ["course", "order"]
+        constraints = [
+            models.UniqueConstraint(fields=["course", "order"], name="unique_course_section_order"),
+        ]
+
+    def __str__(self):
+        return f"{self.course}: {self.title}"
+
+
 class Lesson(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
+    section = models.ForeignKey(
+        CourseSection,
+        on_delete=models.CASCADE,
+        related_name="lessons",
+        blank=True,
+        null=True,
+    )
     title = models.CharField(max_length=180)
     slug = models.SlugField(max_length=220, blank=True)
     video_file = models.FileField(
@@ -123,6 +152,24 @@ class Resource(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+class WatchHistory(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="watch_history")
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name="watch_events")
+    watched_seconds = models.PositiveIntegerField(default=0)
+    completed = models.BooleanField(default=False)
+    last_watched_at = models.DateTimeField(auto_now=True, db_index=True)
+
+    class Meta:
+        ordering = ["-last_watched_at"]
+        constraints = [
+            models.UniqueConstraint(fields=["student", "lesson"], name="unique_student_lesson_watch_history"),
+        ]
+
+    def __str__(self):
+        return f"{self.student} watched {self.lesson}"
 
 
 class Quiz(TimeStampedModel):

@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Payment Successful | Online Learning Portal{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><h1>Payment Successful</h1><p>Your access is ready.</p></div></section>
+<section class="section-pad"><div class="container content-panel"><p>Transaction: {{ payment.order_id }}</p><a class="btn btn-primary-gradient" href="{% url 'student_dashboard' %}">Go to Dashboard</a></div></section>
+{% endblock %}

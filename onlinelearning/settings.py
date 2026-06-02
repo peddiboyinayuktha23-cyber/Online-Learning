@@ -1,4 +1,5 @@
 import os
+import importlib.util
 from pathlib import Path
 
 try:
@@ -26,9 +27,16 @@ def env_list(name, default=""):
     return [item.strip() for item in os.getenv(name, default).split(",") if item.strip()]
 
 
+def package_exists(module_name):
+    try:
+        return importlib.util.find_spec(module_name) is not None
+    except ModuleNotFoundError:
+        return False
+
+
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-change-me-for-local-development")
 DEBUG = env_bool("DJANGO_DEBUG", True)
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost")
 CSRF_TRUSTED_ORIGINS = env_list("DJANGO_CSRF_TRUSTED_ORIGINS")
 
 
@@ -39,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # Third-party API packages.
     "corsheaders",
     "whitenoise.runserver_nostatic",
@@ -55,7 +64,22 @@ INSTALLED_APPS = [
     "notifications",
     "dashboard",
     "categories",
+    "instructors",
+    "students",
+    "quizzes",
 ]
+
+OPTIONAL_APPS = {
+    "crispy_forms": "crispy_forms",
+    "crispy_bootstrap5": "crispy_bootstrap5",
+    "django_filters": "django_filters",
+    "allauth": "allauth",
+    "allauth.account": "allauth.account",
+    "allauth.socialaccount": "allauth.socialaccount",
+}
+for module_name, app_name in OPTIONAL_APPS.items():
+    if package_exists(module_name):
+        INSTALLED_APPS.append(app_name)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -69,6 +93,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+if package_exists("allauth"):
+    MIDDLEWARE.append("allauth.account.middleware.AccountMiddleware")
 
 ROOT_URLCONF = "onlinelearning.urls"
 
@@ -97,7 +123,7 @@ if DATABASE_ENGINE == "sqlite":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR./.'db.sqlite3',
+            "NAME": BASE_DIR / os.getenv("SQLITE_DATABASE_NAME", "db.sqlite3"),
         }
     }
 else:
@@ -113,6 +139,7 @@ else:
     }
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+SITE_ID = 1
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "home"
@@ -155,6 +182,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 12,
     "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend" if package_exists("django_filters") else "rest_framework.filters.SearchFilter",
         "rest_framework.filters.SearchFilter",
         "rest_framework.filters.OrderingFilter",
     ],
@@ -173,6 +201,10 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Online Learning Hub <noreply@example.com>")
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY", "")
 
 RATELIMIT_LOGIN_ATTEMPTS = int(os.getenv("RATELIMIT_LOGIN_ATTEMPTS", "10"))
 
@@ -193,3 +225,10 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = env_bool("DJANGO_SECURE_SSL_REDIRECT", False)
 SESSION_COOKIE_SECURE = env_bool("DJANGO_SESSION_COOKIE_SECURE", not DEBUG)
 CSRF_COOKIE_SECURE = env_bool("DJANGO_CSRF_COOKIE_SECURE", not DEBUG)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "root": {"handlers": ["console"], "level": os.getenv("DJANGO_LOG_LEVEL", "INFO")},
+}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Quiz Result | Online Learning Portal{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><h1>Quiz Result</h1><p>{{ attempt.quiz.title }}</p></div></section>
+<section class="section-pad"><div class="container content-panel">
+    <h2>{{ attempt.score }}%</h2>
+    <p>{% if attempt.passed %}Passed{% else %}Needs improvement{% endif %}</p>
+</div></section>
+{% endblock %}

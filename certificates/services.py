@@ -1,6 +1,7 @@
 from io import BytesIO
 
 from django.core.files.base import ContentFile
+from django.urls import reverse
 from django.utils import timezone
 from reportlab.lib.pagesizes import landscape, letter
 from reportlab.pdfgen import canvas
@@ -34,4 +35,19 @@ def generate_certificate_pdf(certificate: Certificate):
 
     filename = f"{certificate.certificate_id}.pdf"
     certificate.pdf_file.save(filename, ContentFile(buffer.getvalue()), save=True)
+    return certificate
+
+
+def generate_certificate_qr(certificate: Certificate, request=None):
+    try:
+        import qrcode
+    except ImportError:
+        return certificate
+
+    path = reverse("verify_certificate", kwargs={"certificate_id": certificate.certificate_id})
+    verify_url = request.build_absolute_uri(path) if request else path
+    image = qrcode.make(verify_url)
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")
+    certificate.qr_code.save(f"{certificate.certificate_id}.png", ContentFile(buffer.getvalue()), save=True)
     return certificate
