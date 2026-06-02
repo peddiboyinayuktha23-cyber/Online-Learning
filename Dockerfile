@@ -9,4 +9,4 @@ RUN pip install -r requirements.txt
 RUN  python manage.py collectstatic --noinput
 EXPOSE 10000
 
-CMD ["gunicorn","onlinelearning.wsgi.applictaion","--bind","0.0.0.0:10000"]
+CMD ["gunicorn","onlinelearning.wsgi.application","--bind","0.0.0.0:10000"]
